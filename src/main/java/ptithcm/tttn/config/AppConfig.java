@@ -54,20 +54,12 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList(
-
-                "http://localhost:3000", // React
-                "http://localhost:5173",
-                "http://localhost:4200",             // Angular
-                "https://wachshop-react.onrender.com"
-                // Add the deployed GitHub Pages URL
-
-        ));
-        configuration.setAllowedMethods(Collections.singletonList("*"));
-        configuration.setAllowCredentials(true);
-        configuration.setAllowedHeaders(Collections.singletonList("*"));
-        configuration.setExposedHeaders(Arrays.asList("Authorization"));
-        configuration.setMaxAge(3600L);
+        configuration.setAllowedOrigins(Collections.singletonList("*")); // Cho phép tất cả các nguồn
+        configuration.setAllowedMethods(Collections.singletonList("*")); // Cho phép tất cả các phương thức (GET, POST, PUT, DELETE, v.v.)
+        configuration.setAllowedHeaders(Collections.singletonList("*")); // Cho phép tất cả các headers
+        configuration.setAllowCredentials(true); // Cho phép gửi thông tin xác thực (credentials)
+        configuration.setExposedHeaders(Arrays.asList("Authorization")); // Các header được expose
+        configuration.setMaxAge(3600L); // Cấu hình thời gian cache CORS
 
         return request -> configuration;
     }
